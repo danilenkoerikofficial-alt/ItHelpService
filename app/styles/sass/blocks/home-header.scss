@@ -221,10 +221,6 @@ img {
 
 }
 
-.slider-pagination {
-flex: 0 0 140px;
-}
-
 .slider-scrollbar {
 flex: 1 0 0;
 }
@@ -300,3 +296,68 @@ flex: 1 0 0;
 }
 
 
+.slider-pagination {
+    flex: 0 0 140px;
+    display: flex;
+    justify-content: center;
+    height: $size;
+    align-items: center;
+    position: relative;
+    top: -15px;
+    
+    .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+        background-color: $accent;
+        opacity: 0.6;
+        margin: 0 7.5px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        transform-origin: center;
+    }
+    
+    .swiper-pagination-bullet-active {
+        background-color: #ffffff;
+        opacity: 1;
+        transform: scale(1.5);
+        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        
+        &::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: 1px solid #ffffff;
+            position: absolute;
+            border-radius: 50%;
+            left: -1px;
+            top: -1px;
+            animation: gentlePulse 5s ease-in-out infinite;
+        }
+    }
+}
+
+@keyframes gentlePulse {
+    0%, 100% {
+        transform: scale(0.1);
+        border: 1px solid #ffffff;
+        opacity: 0.9;
+    }
+    50% {
+        transform: scale(1.5);
+        border: 1px solid #ffffff;
+        opacity: 0.1;
+    }
+}
+
+/* Дополнительные стили для плавности */
+.swiper-pagination-bullet {
+    will-change: transform, background-color, border-radius;
+}
+
+/* Эффект при наведении */
+.swiper-pagination-bullet:hover {
+    transform: scale(1.3);
+    opacity: 0.8;
+}
