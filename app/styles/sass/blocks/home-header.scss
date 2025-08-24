@@ -333,21 +333,22 @@ flex: 1 0 0;
             border-radius: 50%;
             left: -1px;
             top: -1px;
-            animation: gentlePulse 5s ease-in-out infinite;
+            animation: gentlePulse 3s ease-in-out infinite;
         }
     }
 }
 
 @keyframes gentlePulse {
-    0%, 100% {
+    0% {
+        transform: scale(1.6);
+        border: 1px solid #ffffff;
+        opacity: 0;
+    }
+    
+    100% {
         transform: scale(0.1);
         border: 1px solid #ffffff;
-        opacity: 0.9;
-    }
-    50% {
-        transform: scale(1.5);
-        border: 1px solid #ffffff;
-        opacity: 0.1;
+        opacity: 1;
     }
 }
 
