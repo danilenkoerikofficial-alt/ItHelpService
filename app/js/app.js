@@ -3,7 +3,9 @@ import { Parallax } from "swiper/modules";
 import { Mousewheel } from "swiper/modules";
 import { Controller } from "swiper/modules";
 import { Pagination } from "swiper/modules";
-Swiper.use([ Parallax, Mousewheel, Pagination ])
+import { Scrollbar } from "swiper/modules";
+import { gsap, Power2 } from "gsap";
+Swiper.use([ Parallax, Mousewheel, Pagination, Scrollbar, Power2 ])
 document.addEventListener('DOMContentLoaded', () => {
 
 	const swiperIMG = new Swiper('.slider-img',{
@@ -27,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		el: '.swiper-pagination',
 		clickable: true
 	},
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      draggable: true        
+    },
 	speed: 2000, // медленная скорость перехода
     effect: 'fade', // плавное затухание
     fadeEffect: {
@@ -51,8 +57,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+let gear = document.querySelector('.slider-gear')
+
+swiperText.on('slideNextTransitionStart', function() {
+    gsap.to(gear, 2.8, {
+        rotation: '+=60', 
+        ease: Power2.easeOut
+    })
 })
 
+swiperText.on('slidePrevTransitionStart', function() {
+    gsap.to(gear, 2.8, {
+        rotation: '-=60', 
+        ease: Power2.easeOut
+    })
+})
    swiperIMG.controller.control = swiperText;
+
+})
 
 
