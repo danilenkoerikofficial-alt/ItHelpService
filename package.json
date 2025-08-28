@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "gsap": "^3.13.0",
+    "micromodal": "^0.6.1",
     "parallax": "^0.0.0",
     "swiper": "^11.2.10"
   }

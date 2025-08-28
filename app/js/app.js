@@ -5,13 +5,21 @@ import { Controller } from "swiper/modules";
 import { Pagination } from "swiper/modules";
 import { Scrollbar } from "swiper/modules";
 import { gsap, Power2 } from "gsap";
-Swiper.use([ Parallax, Mousewheel, Pagination, Scrollbar, Power2, ])
+import MicroModal from 'micromodal'
+
+Swiper.use([ Parallax, Mousewheel, Pagination, Scrollbar, Power2 ])
 
 
 // slider
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    //modal
+MicroModal.init({
+openTrigger:'data-micromodal-open'
+
+})
 
 	const swiperIMG = new Swiper('.slider-img',{
 	modules: [ Parallax ],
@@ -74,8 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-    console.log('swiperText инициализирован:', swiperText);
-    console.log('swiperText является экземпляром Swiper:', swiperText instanceof Swiper);
 
 // gear
 
@@ -110,12 +116,11 @@ swiperText.on('slidePrevTransitionStart', function() {
         ease: Power2.easeOut
     })
 })
-console.log('Какой swiper?', swiperText);
 
 // slide change
 
 let curnum = document.querySelector('.slider-pagination-count .current'),
-    pagcur = document.querySelector('.slider-pagination-current')
+    pagcur = document.querySelector('.slider-pagination-current__num')
 
     swiperText.on('slideChange', function() {
         let ind = swiperText.realIndex + 1
@@ -132,6 +137,7 @@ let curnum = document.querySelector('.slider-pagination-count .current'),
             
         })
         curnum.innerHTML = `0${ind}`
+        pagcur.innerHTML = `0${ind}`
         }
         })
         gsap.to(curnum, .2, { 
