@@ -278,7 +278,7 @@ img {
 
 .slider-text__heading {
     text-transform: uppercase;
-    font-size: 80px;
+    font-size: 60px;
     line-height: 120%;
     font-family: oswald-it, sans-serif;
     max-width: 800px;
@@ -288,7 +288,7 @@ img {
 
 .slider-text__desc {
     max-width: 500px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     text-align: right;
     margin-left: 300px;
@@ -381,33 +381,66 @@ cursor: pointer;
 }
 
 .slider-gear {
-    height: 470px;
-    width: 470px;
+    height: 380px;
+    width: 380px;
     position: absolute;
     background-image: url(../images/gear1.svg);
     background-size: cover;
     background-position: center;
     top: 50%;
-    margin-top: -220px;
+    margin-top: -180px;
     scale: 1.4;
-    right: calc(25% - 245px);
+    right: calc(25% - 210px);
     z-index: 2;
-    opacity: 79%;
+    opacity: 95%;
 }
 
+.slider-gear1 {
+    height: 85px;
+    width: 85px;
+    position: absolute;
+    background-image: url(../images/gear1.svg);
+    background-size: cover;
+    background-position: center;
+    top: 145px;
+    margin-top: -180px;
+    scale: 1.4;
+    right: -48px;
+    z-index: 100;
+    opacity: 40%;
+}
 .slider-pagination-count {
     position: absolute;
-    right: 40px;
-    top: 40px;
+    right: 30px;
+    width: 120px;
+    height: 80px; 
+    top: 20px;
     font-family: oswald-it, sans-serif;
     font-weight: 500;
-    font-size: 35px;
+    font-size: 30px;
     .current {
-        font-size: 60px;
+        font-size: 50px;
         color: $accent;
+        display: inline-block;
+        min-width: 52px;
     }
     .total {
         color: $dark;
+    }
+}
+
+.slider-pagination-current {
+    position: absolute;
+    bottom: -30px;
+    right: 15px;
+    font-size: 100px;
+    font-family: oswald-it, sans-serif;
+    z-index: 10;
+    color: $deep;
+    -webkit-text-stroke: 1px #7f7f7f;
+    &__dot {
+        color: $accent;
+        -webkit-text-stroke: 1px transparent;
     }
 }
 

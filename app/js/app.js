@@ -5,20 +5,33 @@ import { Controller } from "swiper/modules";
 import { Pagination } from "swiper/modules";
 import { Scrollbar } from "swiper/modules";
 import { gsap, Power2 } from "gsap";
-Swiper.use([ Parallax, Mousewheel, Pagination, Scrollbar, Power2 ])
+Swiper.use([ Parallax, Mousewheel, Pagination, Scrollbar, Power2, ])
+
+
+// slider
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
 	const swiperIMG = new Swiper('.slider-img',{
 	modules: [ Parallax ],
 	loop: false,
-    speed: 2400,
+    speed: 2000,
 	parallax: true,
-})
+    pagination: {
+        el: '.slider-pagination-count .total',
+        type: 'custom',
+        renderCustom: function (swiper, current, total) {
+            return `/0${total}`
+        }
+    }
+});
+    console.log('swiperIMG инициализирован:', swiperIMG);
 
     const swiperText = new Swiper('.slider-text', {
 	modules: [Controller],	
 	loop: false,
-	speed: 2400,
+	speed: 2000,
     mousewheel: {
 		invert: false,
 	},
@@ -33,6 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
       el: '.swiper-scrollbar',
       draggable: true        
     },
+
+    // pagination 
+
+
 	speed: 2000, // медленная скорость перехода
     effect: 'fade', // плавное затухание
     fadeEffect: {
@@ -57,6 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+    console.log('swiperText инициализирован:', swiperText);
+    console.log('swiperText является экземпляром Swiper:', swiperText instanceof Swiper);
+
+// gear
 
 let gear = document.querySelector('.slider-gear')
 
@@ -73,8 +94,54 @@ swiperText.on('slidePrevTransitionStart', function() {
         ease: Power2.easeOut
     })
 })
-   swiperIMG.controller.control = swiperText;
 
+let gear1 = document.querySelector('.slider-gear1')
+
+swiperText.on('slideNextTransitionStart', function() {
+    gsap.to(gear1, 2.8, {
+        rotation: '-=120', 
+        ease: Power2.easeOut
+    })
 })
 
+swiperText.on('slidePrevTransitionStart', function() {
+    gsap.to(gear1, 2.8, {
+        rotation: '+=120', 
+        ease: Power2.easeOut
+    })
+})
+console.log('Какой swiper?', swiperText);
 
+// slide change
+
+let curnum = document.querySelector('.slider-pagination-count .current'),
+    pagcur = document.querySelector('.slider-pagination-current')
+
+    swiperText.on('slideChange', function() {
+        let ind = swiperText.realIndex + 1
+        console.log(ind)
+        gsap.to(curnum, .2, {
+            force3D: true,
+            y: -10,
+            opacity: 0,
+            ease: Power2.easeOut,
+        onComplete: function() {
+            gsap.to(curnum, .1, {
+                force3D: true,
+                y: 10, 
+            
+        })
+        curnum.innerHTML = `0${ind}`
+        }
+        })
+        gsap.to(curnum, .2, { 
+            force3D: true,
+            y: 0,
+            opacity: 1,
+            ease: Power2.easeOut,
+            delay: .3 
+    })
+
+} )
+
+})
